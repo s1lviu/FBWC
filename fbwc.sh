@@ -1,5 +1,5 @@
 ################################################
-PAROLA_SQL=" " #MySQL master password #
+SQL_PASSWORD=" " #MySQL master password #
 ################################################
 clear
 if [ $# -eq 1 ]; then
@@ -10,7 +10,7 @@ if [ $# -eq 1 ]; then
         server_name  $1 www.$1;
         root /var/www/$1;
         index index.php index.html index.htm;
- 
+
         location / {
             try_files \$uri \$uri/ =404;
         }
@@ -78,10 +78,10 @@ expect \"Set root password?\"
 send \"Y\r\"
 
 expect \"New password:\"
-send \"$PAROLA_SQL\r\"
+send \"$SQL_PASSWORD\r\"
 
 expect \"Re-enter new password:\"
-send \"$PAROLA_SQL\r\"
+send \"$SQL_PASSWORD\r\"
 
 expect \"Remove anonymous users?\"
 send \"y\r\"
