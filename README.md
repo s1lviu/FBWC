@@ -1,12 +1,13 @@
-<h1 id="fswc">FSWC</h1>
+<h1 id="fswc-femp">FSWC FEMP</h1>
 
-<p>FreeBSD Website Creator - Host websites on FreeBSD</p>
+<p><strong>FreeBSD Website Creator - Host websites on FreeBSD without a control panel</strong> <br>
+<em>Automatically installs FreeBSD, Nginx, MySQL, and PHP</em></p>
 
 <p>Downlaod fswc.sh and run it as root as following:</p>
 
 <p>Edit first line - complete the MySQL password <br>
 <code>sh fswc.sh</code> - Initial setup which creates nGinx and MySQL servers <br>
-<code>sh fswc.sh silviu-s.com</code> for adding a domain (“silviu-s.com”)</p>
+<code>sh fswc.sh silviu-s.com</code> for adding a domain (“<a href="http://silviu-s.com">silviu-s.com</a>“)</p>
 
 <p>nGinx global configuration: <code>/usr/local/etc/nginx/nginx.conf</code> <br>
 nGinx logs:</p>
@@ -24,3 +25,5 @@ nGinx logs:</p>
 </code></pre>
 
 <p>The MySQL master password it will be the password you have completed on first line.</p>
+
+<p>This configuration has been succesful tested on a <a href="https://www.digitalocean.com/?refcode=ea14929d1861">DigitalOcean FreeBSD Droplet</a>.</p>
