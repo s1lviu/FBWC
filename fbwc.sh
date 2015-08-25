@@ -10,7 +10,6 @@ if [ $# -eq 1 ]; then
         server_name  $1 www.$1;
         root /var/www/$1;
         index index.php index.html index.htm;
-
         location / {
             try_files \$uri \$uri/ =404;
         }
@@ -41,10 +40,10 @@ sudo mkdir -p /usr/local/etc/nginx/vhosts
 sudo mkdir -p /var/www
 sudo pkg install -y nginx mysql56-server php56 php56-mysql nano expect
 
-sudo echo "mysql_enable=\"YES\"
+echo "mysql_enable=\"YES\"
 nginx_enable=\"YES\"
 php_fpm_enable=\"YES\"
-sendmail_enable=\"YES\"" >> /etc/rc.conf
+sendmail_enable=\"YES\"" | sudo tee -a /etc/rc.conf > /dev/null
 
 
 search="listen = 127.0.0.1:9000"
@@ -52,49 +51,39 @@ replace="listen = /var/run/php-fpm.sock"
 sed -i "" "s|${search}|${replace}|g" /usr/local/etc/php-fpm.conf
 
 
-sudo echo "
+echo "
 listen.owner = www
 listen.group = www
 listen.mode = 0660
-" >> /usr/local/etc/php-fpm.conf
+" | sudo tee -a /usr/local/etc/php-fpm.conf > /dev/null
 
 sudo cp  /usr/local/etc/php.ini-production  /usr/local/etc/php.ini
 
-sudo echo "cgi.fix_pathinfo=0" >> /usr/local/etc/php.ini
+echo "cgi.fix_pathinfo=0" | sudo tee -a /usr/local/etc/php.ini > /dev/null
 
 sudo service php-fpm start
 
 sudo service mysql-server start
 
 expect -c "
-
 set timeout 10
 spawn mysql_secure_installation
-
 expect \"Enter current password for root (enter for none):\"
 send \"\r\"
-
 expect \"Set root password?\"
 send \"Y\r\"
-
 expect \"New password:\"
 send \"$SQL_PASSWORD\r\"
-
 expect \"Re-enter new password:\"
 send \"$SQL_PASSWORD\r\"
-
 expect \"Remove anonymous users?\"
 send \"y\r\"
-
 expect \"Disallow root login remotely?\"
 send \"y\r\"
-
 expect \"Remove test database and access to it?\"
 send \"y\r\"
-
 expect \"Reload privilege tables now?\"
 send \"y\r\"
-
 expect eof
 "
  
@@ -124,7 +113,7 @@ http {
      #virtual hosting
     include /usr/local/etc/nginx/vhosts/*;
     
-}' >> /usr/local/etc/nginx/nginx.conf
+}' | sudo tee -a /usr/local/etc/nginx/nginx.conf > /dev/null
 
 sudo mkdir -p /var/log/nginx
 sudo touch /var/log/nginx/access.log
