@@ -1,4 +1,4 @@
-<h1 id="fswc-femp">FSWC FEMP</h1>
+<h1 id="fswc-femp">FBWC FEMP</h1>
 
 <p><strong>FreeBSD Website Creator - Host websites on FreeBSD without a control panel</strong> <br>
 <em>Automatically installs FreeBSD, Nginx, MySQL, and PHP</em></p>
